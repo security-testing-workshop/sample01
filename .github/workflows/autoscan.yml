@@ -29,7 +29,6 @@ jobs:
     - name: ZAP Full Scan
       uses: zaproxy/action-full-scan@v0.2.0
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
         docker_name: 'owasp/zap2docker-stable'
         target: 'http://localhost:50080/'
         cmd_options: '-a -d'
