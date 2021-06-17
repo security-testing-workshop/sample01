@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+  <title>ログイン | 自動脆弱性診断用アプリケーション（初級編）</title>
+</head>
+
+<body>
+  <div th:if="${param.error}">
+    ユーザー名またはパスワードが違います。
+  </div>
+  <div th:if="${param.logout}">
+    ログアウトしました。
+  </div>
+  <form th:action="@{/login}" method="post">
+    <div><label> ユーザーID：<input type="text" name="username" /> </label></div>
+    <div><label> パスワード：<input type="password" name="password" /> </label></div>
+    <div><input type="submit" value="ログイン" /></div>
+  </form>
+</body>
+
+</html>

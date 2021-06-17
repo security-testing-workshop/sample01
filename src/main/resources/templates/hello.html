@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+  <title>こんにちは世界！ | 自動脆弱性診断用アプリケーション（初級編）</title>
+</head>
+
+<body>
+  <h1 th:inline="text">こんにちは [[${#httpServletRequest.remoteUser}]]！</h1>
+  <form th:action="@{/logout}" method="post">
+    <input type="submit" value="ログアウト" />
+  </form>
+</body>
+
+</html>

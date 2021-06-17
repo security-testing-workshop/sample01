@@ -1,0 +1,35 @@
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: '11.x' # The JDK version to make available on the path.
+        java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
+        architecture: x64 # (x64 or x86) - defaults to x64
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    - name: Run with Gradle
+      run: ./gradlew bootrun &
+    - name: ZAP Full Scan
+      uses: zaproxy/action-full-scan@v0.2.0
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        docker_name: 'owasp/zap2docker-stable'
+        target: 'http://localhost:50080/'
+        cmd_options: '-a -d'
